@@ -1,0 +1,16 @@
+  
+  <div class="span4">
+    <%= form_tag("list", :method=>'get', :class => 'form-horizontal',
+                 :id => 'find_res_by_subject') do %>
+
+    <%= label_tag "subject", "Choose Subject" %>
+    <%= select_tag "subject", options_from_collection_for_select(@subjects, 'SubjectID', 'SubjectName'),
+              :remote => 'true', :onchange => "update_resource_div(this.value)" %>
+
+    <% end %>
+      
+  </div>
+  <div class="span8" id="subResource">
+    <h5>Resources</h5>
+        <%= render :partial => "resources/sublist", :object => @resources %>
+  </div>

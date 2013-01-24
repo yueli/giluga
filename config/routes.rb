@@ -1,11 +1,17 @@
 Giluga::Application.routes.draw do
-  get "static_pages/home"
-
-  get "static_pages/help"
   
-  get "static_pages/about"
+  # get "static_pages/home"
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  root to: 'home#index'
 
-  get "home/index"
+  # get "static_pages/help"
+  match '/help', to: 'static_pages#help'
+  
+  # get "static_pages/about"
+  match '/about', to: 'static_pages#about'
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -13,6 +19,11 @@ Giluga::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
+   # match '/resource/:str' => 'resources#list'
+    
+    match '/resource/:a' => 'resources#list'
+    
+    match "/update_resources" => "subjects#update_resources"
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
@@ -56,11 +67,11 @@ Giluga::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index'
+  # root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+  match ':controller(/:action(/:id))(.:format)'
 end

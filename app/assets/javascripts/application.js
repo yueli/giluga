@@ -12,4 +12,32 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require_tree .
+
+
+function getResult() {  
+    //var index = document.getElementById('link').selectedIndex;  
+    //alert("value="+document.getElementById('link').value);  
+    //alert("text="+document.getElementById('popular_db').options[index].text);
+    
+    if (document.getElementById('link').value != '0') {
+
+    document.forms['popular'].action = "http://www.galileo.usg.edu/express";
+    document.forms['popular'].submit();
+    }
+    
+}  
+ 
+function update_resource_div(subject) {  
+  jQuery.ajax({
+    url: "/update_resources",
+    type: "GET",
+    data: {"subject" : subject},
+    dataType: "html" ,
+    success:  function(data) {
+      jQuery("#subResource").html(data);
+    }
+    })
+}
+    

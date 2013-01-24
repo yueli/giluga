@@ -1,0 +1,34 @@
+<% provide(:title, 'GALILEO@UGA :: HOME') %>
+
+
+<% content_for :javescript_includes do %>
+
+  <%= javascript_include_tag "http://supportforms.epnet.com/eit/scripts/ehostsearch.js","jquery.rails.js" %>
+
+<% end %>
+
+<%= javascript_tag "search_ehost('war')" %>
+
+<table summary="Search Options">
+  <h3> Search Options: </h3>
+
+      <tr>
+        <form name="ehost' onsubmit="search_ehost('#{escape_javascript(esearch)}');;return false;">
+        <th>Quick Search: </th>
+        <td><input type="text" name="ebscohostsearch"></td>
+  
+        <td><input type="submit" value="Submit"></td>
+        </form>
+      </tr>
+      <tr>
+       <th>Popular Databases: </th>
+       <th><%= select_tag "popular_db", options_from_collection_for_select(@popular_db, 'code', 'name', :selected => @popular_db.code),
+       {:prompt => "Select a popular database"}, {:onChange => "{alert('popular database has been changed to x !')}"} %></th>
+    
+      </tr>
+      <tr>
+        <th>Choose Subject: </th>
+        <td><%= select_tag "subject", options_from_collection_for_select(@subject, 'SubjectID', 'SubjectName'),
+                          :onchange => remote_function( :url => { :action => list_select}), :with => "'subject=' + $('subject').value" %></td>
+      </tr>
+</table>
