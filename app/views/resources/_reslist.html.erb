@@ -1,0 +1,67 @@
+
+  <div><%= pluralize(@resources.size, 'resources') unless @resources.nil? %> found</div>
+     <br> 
+    <% @resources.each do |resource| %>
+    
+      <% if resource.parenthetical.blank? then @record_title=resource.name else @record_title=resource.name+'('+resource.parenthetical+')' end %>
+      <ul class="unstyled">
+      <% if resource.PublicURL.nil? %>
+           <li><%= @record_title %></li>
+      <% else %>
+         <% if resource.PublicURL.blank? %>
+          <li><%= @record_title %></li>
+         <% else %>
+           <li><%= link_to "#{@record_title}","#{resource.PublicURL}" %>
+        <% end %>       
+      <% end %>
+      
+      <% if resource.LogoType == '2' then @logo_display = Static::LOGO_DISPLAY_2
+        elsif  resource.LogoType == '1' then @logo_display = Static::LOGO_DISPLAY_1
+          elsif  resource.LogoType == '3' then @logo_display = Static::LOGO_DISPLAY_3
+            elsif  resource.LogoType == '4' then @logo_display = Static::LOGO_DISPLAY_4
+              elsif  resource.LogoType == '5' then @logo_display = Static::LOGO_DISPLAY_5
+              else @logo_display = resource.branding_logo
+          end %>
+        <%= raw @logo_display %>
+           
+        <% if resource.IsNew == 'Y' %>
+             <%= raw Static::NEW_ICON %>
+        <% end %>
+        </li>
+     
+       <% if resource.AccessType == '1' then @access_type = Static::ACCESS_TYPE_1
+        elsif  resource.AccessType == '2' then @access_type = Static::ACCESS_TYPE_2
+          elsif  resource.AccessType == '3' then @logo_display = Static::ACCESS_TYPE_3
+          end %>
+          <%= raw @access_type %>
+          
+      <% if not resource.call_number.nil?  %>
+        <% if not resource.call_number.blank? %>
+          <strong>Call Number:</strong> <%= resource.call_number%>
+        <% end %>
+      <% end %>
+    
+    <% if not resource.cookie.blank? %>
+        <li><font color='#860000'>Internet Explorer Users: cookies must be set to
+       <%= resource.cookie %> for this database to function properly.</font></li>
+    <% end %>
+    <br>
+      
+    <p ><%= raw resource.short_desc %> &nbsp;&nbsp;
+    <% if not resource.endnote.nil? %>
+      <a href="' . <%= resource.endnote %> . '"><img src="/assets/endnote.gif" class="button" alt="Endnote information"></a>&nbsp;
+    <% end %>
+    
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#<%=resource.ResourceID %>">
+    More Info
+    </button>
+     </p>
+    
+    <div id="<%=resource.ResourceID %>" class="collapse">
+    <%= render :partial=>"/resources/moreinfo", :locals=>{:resource => resource} %>
+    </div>
+    
+      
+    </ul>
+    <% end %>
+

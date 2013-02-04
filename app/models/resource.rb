@@ -45,8 +45,31 @@ class Resource < ActiveRecord::Base
  
  # For query: SELECT *,IFNULL(sort_name,name) AS Title FROM Resources JOIN ResourceSubjects 
  #		ON Resources.Production = 'Y' AND Resources.ResourceID = ResourceSubjects.ResourceID AND ResourceSubjects.SubjectID = '$sub_id'";
- 
-  scope :related_on_subject, lambda {|arg| select('IFNULL(sort_name,name) AS Title, Resources.name, Resources.sort_Name, rs.ResourceID, Resources.description, Resources.PublicURL').\
+ # Resources.name, Resources.sort_Name, rs.ResourceID, Resources.description, Resources.PublicURL
+  scope :related_on_subject, lambda {|arg| select('*, IFNULL(sort_name,name) AS Title').\
                                             joins('LEFT JOIN ResourceSubjects rs ON Resources.ResourceID = rs.ResourceID').\
                                             where(["Resources.Production = ? AND rs.SubjectID = ? ", "Y", "#{arg}"]) unless arg.nil? }
+  
+  scope :relevant_on_subject, lambda {|arg| select('*, IFNULL(sort_name,name) AS Title').\
+                                            joins('LEFT JOIN ResourceSubjects rs ON Resources.ResourceID = rs.ResourceID').\
+                                            where(["Resources.Production = ? AND rs.SubjectID = ? AND rs.TopResourceScope = ?", "Y", "#{arg}", "Key"]) unless arg.nil? }
+  
+
+  scope :narrower_on_subject, lambda {|arg| select('*, IFNULL(sort_name,name) AS Title').\
+                                            joins('LEFT JOIN ResourceSubjects rs ON Resources.ResourceID = rs.ResourceID').\
+                                            where(["Resources.Production = ? AND rs.SubjectID = ? AND rs.TopResourceScope = ?", "Y", "#{arg}", "Narrower"]) unless arg.nil? }
+
+
+  scope :broader_on_subject, lambda {|arg| select('*, IFNULL(sort_name,name) AS Title').\
+                                            joins('LEFT JOIN ResourceSubjects rs ON Resources.ResourceID = rs.ResourceID').\
+                                            where(["Resources.Production = ? AND rs.SubjectID = ? AND rs.TopResourceScope = ? ", "Y", "#{arg}", "Broader"]) unless arg.nil? }
+
+  # SELECT * FROM 
+			#Types JOIN ResourceTypes ON Types.TypeID = ResourceTypes.TypeID 
+			#AND ResourceTypes.SubjectID = '$sub_id' 
+			#AND ResourceTypes.TypeAssigned = 'Y')
+			#JOIN ResourceSubjects ON ResourceSubjects.SubjectID = '$sub_id'
+			#AND ResourceSubjects.OtherResourceList = 'Y'
+			#GROUP BY TypeName
+  # scope :more_on_subject, lambda
 end

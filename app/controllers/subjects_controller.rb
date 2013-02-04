@@ -11,21 +11,24 @@ end
   def list
     @subjects = Subject.order("subjects.SubjectName ASC")
     
+    # where clause return a collection, so chain it with first for single record
     if (params[:subject])
-      @resources = Resource.related_on_subject(params[:subject])
+      @subject = Subject.where(["SubjectID = ?", params[:subject]]).first
+      @resources = Resource.relevant_on_subject(params[:subject])
     else
-      @resources = Resource.find_first
+      @subject = Subject.where(["SubjectID = ?","1"]).first
+      @resources = Resource.rellevant_on_subject(@subject.SubjectID)
     end
   
-    #respond_to do |format|
-      #format.html #list.html.erb
-     # format.js {}
-    #end
   end
   
   def update_resources
     @resources = Resource.related_on_subject(params[:subject])
-    render :partial => "resources/sublist", :object => @resources
+    @subject = Subject.where(["SubjectID = ?", params[:subject]]).first
+    
+    # render :partial => "resources/sublist", :object => @resources
+    render :partial => "resources/sublist", :local => { :resources => @resources,
+      :subject => @subject }
   end
     
 

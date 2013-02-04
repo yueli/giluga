@@ -13,8 +13,21 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require_tree .
+//= require_directory .
 
+// this function not in use
+function ehost_search() {
+
+    var url="http://preproxy.galib.uga.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&site=ehost-live&scope=site&type=1&db=a9h&authtype=cookie,ip,uid&bquery=";
+
+    url.src="http://supportforms.epnet.com/eit/scripts/ehostsearch.js";
+        
+    document.forms['ehost_searchbox'].action = "javascript:ebscoHostSearchGo(url);";
+    
+    document.forms['ehost_searchbox'].submit();
+
+
+}
 
 function getResult() {  
     //var index = document.getElementById('link').selectedIndex;  

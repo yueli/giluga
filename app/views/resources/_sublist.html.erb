@@ -1,28 +1,7 @@
-<% provide(:title, "Resource List") %>
 
-
-    
-  <div><%= pluralize(@resources.size, 'resources') unless @resources.nil? %> found</div>
-    
-  <table class="listing" summary="Recource list">
-    <tr class="header">
-      <th>&nbsp;</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>PublicURL</th>
-      <th>More</th>
-      </tr>
-    
-    <% @resources.each do |resource| %>
-    <tr class="<%= cycle('odd', 'even') %>">
-      <td>#</td>
-      <td><%= resource.name %></td>
-      <td><%= resource.description %></td>
-      <td><%= resource.PublicURL %></td>
-      <td class="actions">
-        <%= link_to("Show", {:controller => 'Resource', :action => 'list',
-                      :ResourceID => resource.ResourceID}, :class => 'action show') %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
+<div>
+  <h5><%= @subject.SubjectName %></h5>
+  <div>
+    <%= render(:partial => "/resources/reslist" ) %>
+  </div>
+</div>

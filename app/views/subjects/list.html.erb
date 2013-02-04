@@ -4,13 +4,13 @@
                  :id => 'find_res_by_subject') do %>
 
     <%= label_tag "subject", "Choose Subject" %>
-    <%= select_tag "subject", options_from_collection_for_select(@subjects, 'SubjectID', 'SubjectName'),
+    <%= select_tag "subject", options_from_collection_for_select(@subjects, 'SubjectID', 'SubjectName'), :size => '25',
               :remote => 'true', :onchange => "update_resource_div(this.value)" %>
 
     <% end %>
       
   </div>
-  <div class="span8" id="subResource">
-    <h5>Resources</h5>
-        <%= render :partial => "resources/sublist", :object => @resources %>
+  <div class="span8" id="subResource"> 
+    <%= render :partial => "resources/sublist", :local => { :resources => @resources,
+     :subject => @subject } %>
   </div>

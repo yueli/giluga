@@ -1,0 +1,61 @@
+<div class='fullinfo'>
+      <ul class="unstyled">
+      <% if not resource.description.blank? %>
+            <li><%= raw resource.description %></li>
+      <% end %>
+          
+      <% if not resource.see_also.blank? %>
+         <li><strong>See also: </strong><%= resource.see_also %></li>
+      <% end %>
+      <% if not resource.coverage.blank? %>
+         <li><strong>Coverage Dates: </strong><%= resource.coverage %></li>
+      <% end %>
+      <% if not resource.frequency.blank? %>
+         <li><strong>Updated: </strong><%= resource.frequency %></li>
+      <% end %>
+      <% if not resource.title_list_url.blank? %>
+         <li><%= link_to "Title List","#{resource.title_list_url}" %></li>
+      <% end %>
+      <% if not resource.language.blank? %>
+         <li><strong>Languages: </strong><%= resource.language %></li>
+      <% end %>
+      <% if not resource.vendor_code.blank? %>
+         <li><strong>Database Provider: </strong><%= resource.vendor_code %></li>
+      <% end %>
+      <% if not resource.access_note.blank? %>
+         <li><strong>Online Access: </strong><%= resource.access_note %></li>
+      <% end %>
+      
+      <% if not resource.PhysicalAccessType.blank? %>
+        <li><strong>Location: </strong>
+       <% if resource.PhysicalAccessType == '1' then @location = Static::LOCATION_1
+        elsif  resource.PhysicalAccessType == '2' then @location = Static::LOCATION_2
+          elsif  resource.PhysicalAccessType == '3' then @location = Static::LOCATION_3
+            elsif  resource.PhysicalAccessType == '5' then @location = Static::LOCATION_5
+              elsif  resource.PhysicalAccessType == '6' then @location = Static::LOCATION_6
+                elsif  resource.PhysicalAccessType == '7' then @location = Static::LOCATION_7
+              else @location = "ask library staff about " + resource.PhysicalAccessType
+          end %>
+        <%= raw @location %>
+      <% end %>
+     
+      <% if not resource.remote_note.blank? %>
+         <li><%= resource.remote_note %></li>
+      <% end %>
+      
+      <% if not resource.access_note.blank? %>
+         <li><strong>Online Access: </strong><%= resource.access_note %></li>
+      <% end %>
+
+      <% if not resource.PublicURL.nil? %>
+         <% if not resource.PublicURL.blank? %>
+         <li><strong>URL: </strong><%= resource.PublicURL%></li>
+         <li><a href="javascript:bookmark('<%=resource.PublicURL%>','<%=resource.name.gsub("'","")%>')" class='bookmark'>Bookmark this Database</a></li>
+         <% elsif not resource.physical_access.nil? %>
+            <% if resource.physical_access != 'none' %>
+              <li><strong>Location:</strong> resource.physical_access</li>
+            <% end %>
+         <% end %>       
+      <% end %> 
+
+  </ul></div>

@@ -1,11 +1,12 @@
-$linkColor:      #FF0000;
-$linkColorHover: #000;
+$linkColor:      #ff0000;
+$linkColorHover: #0000ff;
 
 
 @import "bootstrap";
+@import "bootstrap-responsive";
 
 body {
-  padding-top: 120px;
+  padding-top: 130px;
 }
 /* mixins, variables, etc. */
 
@@ -51,6 +52,20 @@ padding: 10px;
 
 }
 
+.fullinfo {
+    background-color: #EFEFE9;
+    border: 1px solid #3E3E6A;
+    margin-bottom: 5px;
+    padding: 10px;
+    ul {
+      margin-bottom: 5px;
+      width: 45em;
+    }
+    li {
+      padding: 10px 5px 5px 0;
+    }
+}
+
 /*
 .center h1 {
   margin-bottom: 10px;
@@ -88,6 +103,7 @@ p {
 
 #logo {
   float: left;
+  top: 20px;
   margin-right: 10px;
   font-family:tahoma; 
   font-size: 23px; 
@@ -97,10 +113,6 @@ p {
   padding-top: 9px;
   font-weight: normal;
   line-height: 1;
-  &:hover {
-    color: #fff;
-    text-decoration: none;
-  }
 }
 
 /*
@@ -114,12 +126,13 @@ p {
 #redbar  {
 
 position:relative;
+top:10px;
 z-index: 2;
 left:10px;
 width:736px;
 background-color:#660000;
 padding:0px;
-height:60px;
+height:70px;
 border: solid 1px #500c0c;
 
 }
@@ -146,15 +159,16 @@ font-family:tahoma;
 color:#ffffff;
 font-size:11px; 
 font-weight:normal;
+top:25px;
 
 }
 
 .portalheader {
 position: relative;
-top: 3px;
+top: 13px;
 left: 10px;
 width: 736px;
-height: 40px;
+height: 37px;
 background-color: #f1e5ab;
 padding: 0px 0px 0px 0px;
 margin-top: 0px;
@@ -190,6 +204,19 @@ footer {
   padding-top: 5px;
   border-top: 1px solid #eaeaea;
   color: #999;
+  leftfooter {
+    float:left;
+    ul {
+      display: block;
+      list-style: none outside none;
+      margin-bottom: 0;
+      margin-top: 8px;
+    }
+    li {
+    margin-left: -10px;
+    }
+  }
+  
   a {
     color: #555;
   }
@@ -199,16 +226,16 @@ footer {
   small {
   float: left;
   }
-  ul {
-  float: right;
-  list-style: none;
-  li {
-    float: left;
-    margin-left: 10px;
-    }
-  }
 
 }
+
+.ugalogo {
+    border: medium none;
+    clear: right;
+    float: right;
+    padding: 5px;
+}
+
 
 /* miscellaneous */
 

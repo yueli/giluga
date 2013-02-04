@@ -1,84 +1,68 @@
 <% provide(:title, 'GALILEO@UGA :: HOME') %>
 
-<table summary="Search Options">
-  <h3> Search Options: </h3>
+<h4> Search Options: </h4>
+              
+              <%= render(:partial => "links" ) %>
 
-      <tr>
-       
+  
+
 <script src="http://supportforms.epnet.com/eit/scripts/ehostsearch.js" type="text/javascript" defer="defer"></script>
 <script type="text/javascript">var url="http://preproxy.galib.uga.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&site=ehost-live&scope=site&type=1&db=a9h&authtype=cookie,ip,uid&bquery=";</script>
-
-<form id="ehost_searchbox" action="javascript:ebscoHostSearchGo(url);">
-  
-<p class="toppart">
-<span class="portaloptions">Quick Search: </span>
-<input type="text" id="ebscohostsearch" name="ebscohostsearch" class="searchboxstyle2" size="30">
-<input type="image" name="submit"  value="Search" src="http://www.libs.uga.edu/research/images/gobox.gif" alt="go" align="top" style="padding-left: 10px; padding-top: 1px">
 <br>
-<span class="smalltext" style="padding-left: 5px">in Academic Search Complete</span>
-
-</p>
-</form>
-      </tr>
-       <tr>
-        
-       <th>Popular Databases: </th>
-  
-      <form id = 'popular'>    
-       <th><%= select_tag "link", options_from_collection_for_select(@popular_db, 'code', 'name', '0'), {:onChange => "{getResult();}"} %></th>
-       </form>
-      </tr>
-      <tr>
-        <th>Choose Subject: </th>
-        <%= form_tag "subjects/list" do %>
-        
-        <td><%= select_tag "subject", options_from_collection_for_select(@subject, 'SubjectID', 'SubjectName'),
-                          :prompt => "--select a subject--", :onchange => "javascript: this.form.submit();" %></td>
-       <% end %>
-      </tr>
       
-      <tr>
-        <th>Select a Resource by Name:  </th>
-      </tr>
-      <tr>
-        <td>
+        <form class="form-inline" id="ehost_searchbox" action="javascript:ebscoHostSearchGo(url);">
+        <label class='control-label' for="ebscohostsearch">Quick Search: </label> 
+        <div class="input-append">
+        <input class="span2" id="ebscohostsearch" type="text" >
+        <button class="btn" type="submit"><i class="icon-search"></i> Go </button>
+       </div>
+        <span class="help-inline">in Academic Search Complete</span>
+        </form>
+<br>
+       
+  
+      <form class="form-inline" id = 'popular'>
+         <label class='control-label' >Popular Databases: </label>
+       <%= select_tag "link", options_from_collection_for_select(@popular_db, 'code', 'name', '0'), {:onChange => "{getResult();}"} %>
+       </form>
+      
+      <br>
+      
+        <%= form_tag "subjects/list", :class=>"form-inline" do %>
+        <label class='control-label' >Choose Subject: </label>
+        <%= select_tag "subject", options_from_collection_for_select(@subject, 'SubjectID', 'SubjectName'),
+                          :prompt => "--select a subject--", :onchange => "javascript: this.form.submit();" %>
+       <% end %>
+    
+      <br>
+        <br>
+          
+        <h5>Select a Resource by Name:  </h5>
+    
           
          <%= render(:partial => "/resources/atoz" ) %>
 
-        </td>
-      </tr>
-      <tr>
-        <th>Or Search for a Resource by Name:</th>
-       </tr>
-      <tr>
-        <%= form_tag "/resources/list" do -%>
-      <td>Filter Options: <%= select_tag "filter", "<option>Begins with</option><option selected='selected'>Contains</option><option>Exact match</option>".html_safe %> </td>
-      <td><%= text_field_tag "str" %></td>
-      <td><%= submit_tag 'Go', :name => "resourceuga" %></td>
+  <br>
+    <h5>Or Search for a Resource by Name:</h5>
+       
+        <%= form_tag "/resources/list", :class =>"form-inline" do -%>
+    
+        <label class="radio inline">
+          <input type="radio" name="filter" value="Begins with">Begins with
+        </label>
+         <label class="radio inline">
+          <input type="radio" name="filter" value="Contains" checked>Contains
+        </label>
+          <label class="radio inline">
+          <input type="radio" name="filter" value="Exact match">Exact match
+        </label>
+      
+      <div class="input-append">
+        <input class="span2" name="str" type="text" >
+        <button class="btn" name="resourceuga" type="submit"><i class="icon-search"></i> Go </button>
+       </div>
+      
         <% end %> 
-      </tr>
-           
-      <tr>
       
-        
-      </tr>
-<br>
 
 
-
-      
-</table>
-
-<div class="input-append">
-  <input class="span4" id="appendedDropdownButton" type="text">
-  <div class="btn-group">
-    <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-search"></i>
-      Contains Search
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li>Begins With Search</li>
-      <li>Exact Match Search</li>
-    </ul>
-  </div>
-</div>
