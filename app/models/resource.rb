@@ -15,34 +15,58 @@ class Resource < ActiveRecord::Base
 
   scope :visible, where(:visible => true)
   scope :invisible, where(:visible => false)
-  scope :sorted, order('resources.title ASC')
+  scope :sorted, order('Title ASC')
 
-  scope :all_digits, where(["Production=? AND door_id IS NOT NULL AND door_id != '' ", "Y"])
-                      .where(["sort_name LIKE ? OR sort_name LIKE ? OR sort_name LIKE ? OR sort_name LIKE ? ", "0%", "1%","2%","3%"])
-  # $query = "SELECT *,IFNULL(sort_name,name) AS Title FROM Resources WHERE Production = 'Y' AND door_id IS NOT NULL AND door_id !='' AND (sort_name LIKE '0%'";
-
-  scope :all_a, where(["Production=? AND door_id IS NOT NULL AND door_id != '' ", "Y"])
-                      .where(["(sort_name IS NULL AND name LIKE ? ) OR (sort_name IS NOT NULL AND sort_name LIKE ? )", "a%", "a%"])
-  # SELECT *,IFNULL(sort_name,name) AS Title FROM Resources WHERE Production = 'Y'
-  # AND door_id IS NOT NULL AND door_id !='' AND name LIKE '$key%' AND sort_name IS NULL
-  # UNION
-  # SELECT *,IFNULL(sort_name,name) AS Title
-  # FROM Resources WHERE Production = 'Y' AND door_id IS NOT NULL AND door_id !=''
-  # AND sort_name LIKE '$key%' AND sort_name IS NOT NULL ORDER BY Title
+  # SELECT *,IFNULL(sort_name,name) AS Title FROM Resources WHERE Production = 'Y' AND door_id IS NOT NULL
+  # AND door_id !='' AND (sort_name LIKE '0%') ORDER BY Title);
   
-  scope :all_atoz, where(["Production=? AND door_id IS NOT NULL AND door_id != '' ", "Y"])
+  scope :alphabet_digits,
+        :select => " *, IFNULL(sort_name,name) AS Title ",
+        :conditions => ["Production=? AND door_id IS NOT NULL AND door_id != '' AND
+                       (sort_name LIKE ? OR sort_name LIKE ? OR sort_name LIKE ? OR sort_name LIKE ? OR sort_name LIKE ?
+                      OR sort_name LIKE ? OR sort_name LIKE ? OR sort_name LIKE ? OR sort_name LIKE ? OR sort_name LIKE ?) ", "Y","0%","1%","2%","3%","4%","5%","6%","7%","8%","9%" ],
+        :order => "Title"
+        
+  # SELECT *,IFNULL(sort_name,name) AS Title FROM Resources WHERE Production = 'Y'
+  #   AND door_id IS NOT NULL AND door_id !='' AND name LIKE '$key%' AND sort_name IS NULL
+  #   UNION SELECT *,IFNULL(sort_name,name) AS Title FROM Resources WHERE Production = 'Y'
+  #   AND door_id IS NOT NULL AND door_id !='' AND sort_name LIKE '$key%'
+  #   AND sort_name IS NOT NULL ORDER BY Title
+  
+  scope :alphabet_sort_name, lambda {|arg| select('*, IFNULL(sort_name,name) AS Title').\
+                                        where(["Production=? AND door_id IS NOT NULL AND door_id != '' AND sort_name IS NOT NULL AND sort_name LIKE ? ", "Y", "#{arg}%"]) }
+  
+  scope :alphabet_name, lambda {|arg| select('*, IFNULL(sort_name,name) AS Title').\
+                                        where(["Production=? AND door_id IS NOT NULL AND door_id != '' AND sort_name IS NULL AND name LIKE ? ", "Y", "#{arg}%"]) }
+  
+ 
+  #scope :all_a, where(["Production=? AND door_id IS NOT NULL AND door_id != '' ", "Y"])
+  #                    .where(["(sort_name IS NULL AND name LIKE ? ) OR (sort_name IS NOT NULL AND sort_name LIKE ? )", "a%", "a%"])
+
+  
+  scope :alphabet_all, where(["Production=? AND door_id IS NOT NULL AND door_id != '' ", "Y"])
+  
+  # for empty [:str]
+  scope :str_all,
+        :select => " *, IFNULL(sort_name,name) AS Title ",
+        :conditions => ["Production=? ", "Y" ],
+        :order => "Title"
   
   # SELECT *,IFNULL(sort_name,name) AS Title FROM Resources WHERE Production = 'Y' AND name LIKE '$str%' OR parenthetical LIKE '$str%' ORDER BY Title
 
-  scope :all_with_b, lambda {|arg| where(["Production = ? AND name LIKE ? OR parenthetical LIKE ? ", "Y", "#{arg}%", "#{arg}%"]) unless arg.nil? }
-
-  #scope :all_with_c,
-  #scope :all_with_e,
+  scope :begins_with, lambda {|arg| select('*, IFNULL(sort_name,name) AS Title').\
+                                        where(["Production=? AND name LIKE ? OR parenthetical LIKE ? ", "Y", "#{arg}%", "#{arg}%"]) }
   
-  def self.begins_with(arg)
-    where(["Production = ? AND name LIKE ? OR parenthetical LIKE ? ", "Y", "#{arg}%", "#{arg}%"]) unless arg.nil? 
-  end
- 
+  scope :contains, lambda {|arg| select('*, IFNULL(sort_name,name) AS Title').\
+                                        where(["Production=? AND name LIKE ? OR parenthetical LIKE ? ", "Y", "%#{arg}%", "%#{arg}%"]) }
+  
+  scope :exact_match, lambda {|arg| select('*, IFNULL(sort_name,name) AS Title').\
+                                        where(["Production=? AND name LIKE ? OR parenthetical LIKE ? ", "Y", "#{arg}", "#{arg}"]) }
+  
+  #def self.begins_with(arg)
+  #  where(["Production = ? AND name LIKE ? OR parenthetical LIKE ? ", "Y", "#{arg}%", "#{arg}%"]) unless arg.nil? 
+  #end
+  
  # For query: SELECT *,IFNULL(sort_name,name) AS Title FROM Resources JOIN ResourceSubjects 
  #		ON Resources.Production = 'Y' AND Resources.ResourceID = ResourceSubjects.ResourceID AND ResourceSubjects.SubjectID = '$sub_id'";
  # Resources.name, Resources.sort_Name, rs.ResourceID, Resources.description, Resources.PublicURL
@@ -71,5 +95,27 @@ class Resource < ActiveRecord::Base
 			#JOIN ResourceSubjects ON ResourceSubjects.SubjectID = '$sub_id'
 			#AND ResourceSubjects.OtherResourceList = 'Y'
 			#GROUP BY TypeName
-  # scope :more_on_subject, lambda
+  scope :by_type, lambda {|arg| select('*, IFNULL(sort_name,name) AS Title').\
+                                            joins('LEFT JOIN ResourceSubjects rs ON Resources.ResourceID = rs.ResourceID').\
+                                            where(["Resources.Production = ? AND rs.SubjectID = ? AND rs.TopResourceScope = ? ", "Y", "#{arg}", "Broader"]) unless arg.nil? }
+
+  # SELECT *, IFNULL(sort_name,name) AS Title FROM
+	#			(Resources JOIN ResourceTypes ON Resources.Production = 'Y' 
+	#			AND Resources.ResourceID = ResourceTypes.ResourceID 
+	#			AND ResourceTypes.SubjectID = '$sub_id' 
+	# put in the next step:			AND ResourceTypes.TypeID = '$type_id' 
+	#			AND ResourceTypes.TypeAssigned = 'Y')
+	#			JOIN ResourceSubjects ON Resources.ResourceID = ResourceSubjects.ResourceID
+	#			AND ResourceSubjects.SubjectID = '$sub_id'
+	#			AND ResourceSubjects.OtherResourceList = 'Y' ORDER BY Title
+
+  scope :more_on_subject, lambda {|arg| select('*, IFNULL(sort_name,name) AS Title').\
+                                            joins('LEFT JOIN ResourceTypes rt ON Resources.ResourceID = rt.ResourceID').\
+                                            joins('LEFT JOIN ResourceSubjects rs ON Resources.ResourceID = rs.ResourceID').\
+                                            where(["rs.SubjectID = rt.SubjectID AND Resources.Production = ? AND rs.SubjectID = ? AND rs.OtherResourceList = ? ", "Y", "#{arg}", "Y" ])  }
+  
+  # AND ResourceTypes.TypeID = '$type_id' 
+  scope :by_type, lambda {|arg| where(["rt.TypeID = ?", "#{arg}"]) }
+
+
 end

@@ -53,4 +53,7 @@ function update_resource_div(subject) {
     }
     })
 }
-    
+
+/* tabbable tabs for more resources on specific subject */
+
+   

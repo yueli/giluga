@@ -1,0 +1,10 @@
+    <div>
+    <%= form_tag("list", :method=>'get', :class => 'form-horizontal',
+                 :id => 'find_res_by_subject') do %>
+
+    
+    <%= select_tag "subject", options_from_collection_for_select(@subjects, 'SubjectID', 'SubjectName', (@subject.SubjectID unless @subject.nil?)),
+      :size => '25', :remote => 'true', :onchange => "update_resource_div(this.value)" %>
+
+    <% end %>
+    </div>

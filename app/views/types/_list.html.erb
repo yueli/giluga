@@ -1,0 +1,26 @@
+<div><%= pluralize(@types.size, 'types') unless @types.nil? %> found</div>
+     <br> 
+
+     
+
+  <ul>
+     <% @types.each do |type| %>
+     
+     <li>
+      <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#<%=type.TypeID %>">
+          <%= type.TypeName %>
+     </button>
+    
+    <div id="<%=type.TypeID %>" class="collapse">
+          <%= render :partial=>"/resources/reslist", :locals=>{:collection => @more_resource["#{type.TypeID}"]} %>
+    </div>
+     
+     </li>
+
+     <% end %>
+  </ul>
+
+</div>
+       
+ 
+    

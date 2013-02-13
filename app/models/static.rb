@@ -21,4 +21,16 @@ class Static < ActiveRecord::Base
   LOCATION_6 = "Science Library Reference Collection</li>"
   LOCATION_7 = "Science Library Government Document Stacks</li>"
   
+  #ALPHABET_LIST = [{"0-9"=>'digits'},{"A"=>'a'},{"B"=>'b'},{"C"=>'c'},{"D"=>'d'},
+   #                {"E"=>'e'},{"F"=>'f'},{"G"=>'g'},{"H"=>'h'},{"I"=>'i'},{"J"=>'j'},{"K"=>'k'},
+   #                {"L"=>'l'},{"M"=>'m'},{"N"=>'n'},{"O"=>'o'},{"P"=>'p'},{"R"=>'r'},
+   #                {"S"=>'s'},{"T"=>'t'},{"U"=>'u'},{"V"=>'v'},{"W"=>'w'},{"Z"=>'z'},{"A-Z"=>'all'}]
+  
+  ALPHABET_LIST = [{"key"=>"0-9", "value" =>'digits'},{"key"=>"A", "value"=>'a'},{"key"=>"B", "value"=>'b'},{"key"=>"C", "value"=>'c'},{"key"=>"D", "value"=>'d'},
+                   {"key"=>"E", "value"=>'e'},{"key"=>"F", "value"=>'f'},{"key"=>"G", "value"=>'g'},{"key"=>"H", "value"=>'h'},{"key"=>"I", "value"=>'i'},{"key"=>"J", "value"=>'j'},{"key"=>"K", "value"=>'k'},
+                   {"key"=>"L", "value"=>'l'},{"key"=>"M", "value"=>'m'},{"key"=>"N", "value"=>'n'},{"key"=>"O", "value"=>'o'},{"key"=>"P", "value"=>'p'},{"key"=>"R", "value"=>'r'},
+                   {"key"=>"S", "value"=>'s'},{"key"=>"T", "value"=>'t'},{"key"=>"U", "value"=>'u'},{"key"=>"V", "value"=>'v'},{"key"=>"W", "value"=>'w'},{"key"=>"Z", "value"=>'z'},{"key"=>"A-Z", "value"=>'all'}]
+  
+  
+  
 end

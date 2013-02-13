@@ -13,8 +13,8 @@ class Subject < ActiveRecord::Base
   # named scopes : queries defined
   scope :visible, where(:visible => true)
   scope :invisible, where(:visible => false)
-  scope :sorted1, order('subjects.SubjectName ASC')
-  scope :sorted2, order('subjects.SubjectName DESC') 
+  scope :sorted, order('subjects.SubjectName ASC')
+  #scope :sorted2, order('subjects.SubjectName DESC') 
   scope :search, lambda {|query| where(["SubjectName LIKE ?", "%#{query}%"])}
   
 end

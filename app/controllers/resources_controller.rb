@@ -1,38 +1,48 @@
 class ResourcesController < ApplicationController
   def index
+    list
+    render ('list')
   end
   
   def list
-    
-     
-     
+        
     if (params[:resourceuga] != nil)
      #@resources = Resource.all_with_b(params[:str])
       
-      if (params[:filter] == "Contains")
-        @resources = Resource.begins_with(params[:str])
-
-      elsif (params[:filter] == "Begins with")
-        @resources = Resource.begins_with(params[:str])
-
+      if(params[:str].blank?)
+        @resources = Resource.str_all
       else
-        @resources = Resource.all_with_b(params[:str])
-      end
-     
-      
-    elsif (params[:digits])
-      @resources = Resource.all_digits
+        if (params[:filter] == "Contains")
+          @resources = Resource.contains(params[:str]).sorted
 
-    elsif (params[:a] )
-      @resources = Resource.all_a
+        elsif (params[:filter] == "Begins with")
+          @resources = Resource.begins_with(params[:str]).sorted
+
+        else
+          @resources = Resource.exact_match(params[:str]).sorted
+        end
+      end
+      
+    #elsif (params[:digits])
+    elsif (params[:category])
+      
+      if(params[:category] == 'digits')
+        @resources = Resource.alphabet_digits
+        
+      elsif(params[:category] == 'all')
+        @resources = Resource.alphabet_all
+        
+      else
+        @resources = Resource.alphabet_sort_name(params[:category]) + Resource.alphabet_name(params[:category])
+        #@resources = Resource.alphabet_name(params[:category]) # no records in the test database
+      end
 
     else
       # Hmm, someone is trying to cause trouble.
-      @resources = Resource.all_atoz
+      @resources = Resource.alphabet_all
+      
     end
     
   end
-  
-  
   
 end

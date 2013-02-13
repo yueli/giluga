@@ -5,12 +5,13 @@ $linkColorHover: #0000ff;
 @import "bootstrap";
 @import "bootstrap-responsive";
 
-body {
-  padding-top: 130px;
+body { 
+  border: 10px solid #eaeaea;
 }
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
+$darkRed: #666666;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
@@ -39,6 +40,10 @@ textarea {
   h1 {
   margin-bottom: 10px;
   }
+}
+
+.bold {
+  font-weight: bold;
 }
 
 
@@ -99,42 +104,47 @@ p {
   line-height: 1.7em;
 }
 
+
+.galileo  {
+
+margin: 0;
+padding: 0;
+width: 88%;
+text-align: right;
+color:#3e3e6a;  
+font-size: 12px; 
+font-weight: normal;
+text-decoration: none;
+}
+
 /* header */
 
-#logo {
+.container {
+  
+}
+.logo {
   float: left;
   top: 20px;
   margin-right: 10px;
   font-family:tahoma; 
   font-size: 23px; 
-  color: #fff;
   text-transform: capitalize;
   letter-spacing: -1px;
-  padding-top: 9px;
+  padding-top: 20px;
   font-weight: normal;
   line-height: 1;
+  a {
+    color: #fff;
+   
+  }
+  
 }
 
-/*
-#logo:hover {
-  color: #fff;
-  text-decoration: none;
-}
-*/
-
-
-#redbar  {
-
-position:relative;
-top:10px;
-z-index: 2;
-left:10px;
-width:736px;
-background-color:#660000;
-padding:0px;
-height:70px;
-border: solid 1px #500c0c;
-
+.navbar-inner {
+  background-color: #660000; /* background color will be black for all browsers */
+  background-image: none;
+  background-repeat: no-repeat;
+  filter: none;
 }
 
 #headername {
@@ -150,24 +160,20 @@ font-weight:normal;
 }
 
 #searchbox  {
-float: right;
 
-/*position:absolute;
-top:25px;
-left:455px;*/
 font-family:tahoma; 
 color:#ffffff;
 font-size:11px; 
 font-weight:normal;
-top:25px;
+padding: 20px 0px 0px 0px;
 
 }
 
 .portalheader {
 position: relative;
-top: 13px;
+top: 0px;
 left: 10px;
-width: 736px;
+width: 100%;
 height: 37px;
 background-color: #f1e5ab;
 padding: 0px 0px 0px 0px;
@@ -176,11 +182,8 @@ margin-top: 0px;
 }
 
 .portalheader img {
-vertical-align: center;
-border-bottom:1px solid #3e3e6a;
-border-right:1px solid #3e3e6a; 
-border-left:1px solid #3e3e6a;
-border-top:1px solid #3e3e6a; 
+float: left;
+max-width: 100%;
 }
 
 .portalheader h2  {
@@ -193,16 +196,17 @@ text-align: center;
 margin-top: 0px;
 padding-top: 12px;
 margin-bottom: 0px;
-
-
 }
+
+.responsive-image { max-width:100%; height:100%; }
 
 /* footer */
 
-footer {
+.footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid #eaeaea;
+  font-size: 11px;
   color: #999;
   leftfooter {
     float:left;
@@ -218,7 +222,7 @@ footer {
   }
   
   a {
-    color: #555;
+    color: #8C1717;
   }
   &:hover {
     color: #222;
@@ -236,6 +240,10 @@ footer {
     padding: 5px;
 }
 
+.uga {
+    font-size: 14px;
+    margin-top: 0px;
+}
 
 /* miscellaneous */
 

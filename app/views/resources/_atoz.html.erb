@@ -3,38 +3,20 @@
 
 
 <div class="btn-toolbar">
-  <%= form_tag "/resources/list", :method => 'get', :name => "filter_form" do %>
+ 
   <div class="btn-group">
+    
+    <% Static::ALPHABET_LIST.each do |letter| %>
 
-    <button name="digits" type="submit" class="btn">0-9</button>
-    <button name="a" type="submit" class="btn">A</button>
-    <button class="btn">B</button>
-    <button class="btn">C</button>
-    <button class="btn">D</button>
-    <button class="btn">E</button>
-<button class="btn">F</button>
-<button class="btn">G</button>
-<button class="btn">H</button>
-<button class="btn">I</button>
-<button class="btn">J</button>
-<button class="btn">K</button>
-</br>
-<button class="btn">L</button>
-<button class="btn">M</button>
-<button class="btn">N</button>
-<button class="btn">O</button>
-<button class="btn">P</button>
-Q
-<button class="btn">R</button>
-<button class="btn">S</button>
-<button class="btn">T</button>
-<button class="btn">U</button>
-<button class="btn">V</button>
-<button class="btn">W</button>
-X
-Y
-<button class="btn">Z</button>
-<button class="btn">A-Z</button>
+      <% if letter['key'] == 'L' then %>
+        </br>
+      <% end %>
+
+      <%= link_to "#{letter['key']}", {:controller => "resources", :action => "list", :category=>"#{letter['value']}"}, :class => "btn" %>
+
+    <% end %>
   </div>
-<% end %>
+  
+  </br>
+  
 </div>

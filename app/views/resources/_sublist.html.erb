@@ -1,7 +1,52 @@
 
 <div>
   <h5><%= @subject.SubjectName %></h5>
-  <div>
-    <%= render(:partial => "/resources/reslist" ) %>
+  <div id="tabs" class="tabbable">
+
+  <ul class="nav nav-tabs" id="resourceTabs">
+    <li class='active'><a href="#keyRes" data-taggle="tab">Key Resources</a></li>
+    <% if not @types.blank? %>
+    <li><a href="#moreRes" data-taggle="tab">More Resources</a></li>
+    <% end %>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="keyRes">
+      <%= render(:partial => "/resources/reslist" , :locals => {:collection => @resources }) %>
+    </div>
+    <% if not @types.blank? %>
+    <div class="tab-pane" id="moreRes">
+ 
+       <ul>
+     <% @types.each do |type| %>
+     
+     <li>
+      <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#<%=type.TypeID %>">
+          <%= type.TypeName %>
+     </button>
+    
+    <div id="<%=type.TypeID %>" class="collapse">
+          <%= render :partial=>"/resources/reslist", :locals=>{:collection => @more_resources[:"#{type.TypeID}"]} %>
+    </div>
+     
+     </li>
+
+     <% end %>
+  </ul>
+
+    </div>
+    <% end %>
+  </div>
+  
   </div>
 </div>
+
+ 
+<script>
+
+    $('#resourceTabs a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+    })
+    
+</script>

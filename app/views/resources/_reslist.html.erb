@@ -1,7 +1,7 @@
 
-  <div><%= pluralize(@resources.size, 'resources') unless @resources.nil? %> found</div>
+  <div><%= pluralize(collection.size, 'resources') unless collection.nil? %> found</div>
      <br> 
-    <% @resources.each do |resource| %>
+    <% collection.each do |resource| %>
     
       <% if resource.parenthetical.blank? then @record_title=resource.name else @record_title=resource.name+'('+resource.parenthetical+')' end %>
       <ul class="unstyled">

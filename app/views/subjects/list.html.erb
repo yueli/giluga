@@ -1,16 +1,23 @@
-  
+
   <div class="span4">
-    <%= form_tag("list", :method=>'get', :class => 'form-horizontal',
-                 :id => 'find_res_by_subject') do %>
+    
+        <%= form_tag("list", :method=>'get', :class => "navbar-search pull-left") do %>
+          <%= label_tag "subject", "Choose Subject" %>
 
-    <%= label_tag "subject", "Choose Subject" %>
-    <%= select_tag "subject", options_from_collection_for_select(@subjects, 'SubjectID', 'SubjectName'), :size => '25',
-              :remote => 'true', :onchange => "update_resource_div(this.value)" %>
-
-    <% end %>
+          <%= text_field_tag 'search', params[:search], :class => 'input-medium search-query', :data => { :provide => 'typeahead', :source => @subjects},
+          :placeholder => 'Or Search...', :autocomplete => "off" %>
+        <% end %>
+    
+      
+      <div id="subjectList">
+        <%= render :partial => "search_list" %>
+      </div>
+    
       
   </div>
+  
   <div class="span8" id="subResource"> 
-    <%= render :partial => "resources/sublist", :local => { :resources => @resources,
-     :subject => @subject } %>
+    <%= render :partial => "resources/sublist" %>
   </div>
+  
+  

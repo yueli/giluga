@@ -5,6 +5,10 @@ Giluga::Application.routes.draw do
   # just remember to delete public/index.html.
   root to: 'home#index'
 
+# get "static_pages/about"
+  match '/demo', to: 'home#demo'
+  match '/demo2', to: 'home#demo2'
+
   # get "static_pages/help"
   match '/help', to: 'static_pages#help'
   
@@ -24,6 +28,8 @@ Giluga::Application.routes.draw do
     match '/resource/:a' => 'resources#list'
     
     match "/update_resources" => "subjects#update_resources"
+    
+   
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

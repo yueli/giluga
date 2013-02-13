@@ -1,8 +1,12 @@
 <% provide(:title, 'GALILEO@UGA :: HOME') %>
 
-<h4> Search Options: </h4>
+    <div class="row">
+    <div class="span6"><h4> Search Options: </h4></div>
+    <div class="span4 offset2"><%= render(:partial => "links" ) %></div>
+    </div>
+
               
-              <%= render(:partial => "links" ) %>
+            
 
   
 
@@ -11,7 +15,7 @@
 <br>
       
         <form class="form-inline" id="ehost_searchbox" action="javascript:ebscoHostSearchGo(url);">
-        <label class='control-label' for="ebscohostsearch">Quick Search: </label> 
+        <label class='control-label bold' for="ebscohostsearch">Quick Search: </label> 
         <div class="input-append">
         <input class="span2" id="ebscohostsearch" type="text" >
         <button class="btn" type="submit"><i class="icon-search"></i> Go </button>
@@ -22,21 +26,20 @@
        
   
       <form class="form-inline" id = 'popular'>
-         <label class='control-label' >Popular Databases: </label>
+         <label class='control-label bold' >Popular Databases: </label>
        <%= select_tag "link", options_from_collection_for_select(@popular_db, 'code', 'name', '0'), {:onChange => "{getResult();}"} %>
        </form>
       
       <br>
       
         <%= form_tag "subjects/list", :class=>"form-inline" do %>
-        <label class='control-label' >Choose Subject: </label>
+        <label class='control-label bold' >Choose Subject: </label>
         <%= select_tag "subject", options_from_collection_for_select(@subject, 'SubjectID', 'SubjectName'),
-                          :prompt => "--select a subject--", :onchange => "javascript: this.form.submit();" %>
+                          :prompt => "-Select a Subject-", :onchange => "javascript: this.form.submit();" %>
        <% end %>
     
       <br>
-        <br>
-          
+        
         <h5>Select a Resource by Name:  </h5>
     
           
@@ -64,5 +67,12 @@
       
         <% end %> 
       
+    <div class="galileo">
 
+    <img src="http://www.libs.uga.edu/research/images/fundbygalileo.gif" align="bottom" alt="GALILEO Logo" />
+    <a href="http://www.galileo.usg.edu">
+    Go to statewide GALILEO interface
+    </a>
+ 
+    </div>
 
