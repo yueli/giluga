@@ -1,5 +1,8 @@
 class Subject < ActiveRecord::Base
-  attr_accessible :SubjectName, :TipDesc_1, :TipDesc_2, :TipDesc_3, :TipDesc_4, :TipDesc_5, :TipDesc_6
+  
+  attr_accessible :SubjectName, :TipDesc_1, :tipURL_1, :TipDesc_2, :tipURL_2, :TipDesc_3, :tipURL_3,
+  :TipDesc_4, :tipURL_4, :TipDesc_5, :tipURL_5, :TipDesc_6, :tipURL_6
+  
   has_many :resources
   
   # Don't need to validate (in most cases):
@@ -11,10 +14,12 @@ class Subject < ActiveRecord::Base
   # validates_length_of allows strings with only spaces!
   
   # named scopes : queries defined
-  scope :visible, where(:visible => true)
-  scope :invisible, where(:visible => false)
+  #scope :visible, where(:visible => true)
+  scope :tips, lambda {|arg| where(["SubjectID = ?", "#{arg}"]) }
+    
   scope :sorted, order('subjects.SubjectName ASC')
-  #scope :sorted2, order('subjects.SubjectName DESC') 
+  #scope :sorted2, order('subjects.SubjectName DESC')
+  
   scope :search, lambda {|query| where(["SubjectName LIKE ?", "%#{query}%"])}
   
 end

@@ -1,4 +1,7 @@
 class ResourcesController < ApplicationController
+  
+   layout 'chooseSub'
+   
   def index
     list
     render ('list')

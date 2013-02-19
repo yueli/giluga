@@ -1,0 +1,23 @@
+<div class="btn-group">
+  <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" >
+    <i class="icon-th-list"></i> Important Links
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <!-- dropdown menu links -->
+    <div class="otherlinks">
+  <% if not @tip.blank? then %>
+   
+  
+    <li><%= link_to "#{@tip.TipDesc_1}", "#{@tip.tipURL_1}" unless @tip.tipURL_1.nil?  %></li>
+    <li><%= link_to "#{@tip.TipDesc_2}", "#{@tip.tipURL_2}" unless @tip.tipURL_2.nil?  %></li>
+    <li><%= link_to "#{@tip.TipDesc_3}", "#{@tip.tipURL_3}" unless @tip.tipURL_3.nil?  %></li>
+    <li><%= link_to "#{@tip.TipDesc_4}", "#{@tip.tipURL_4}" unless @tip.tipURL_4.nil?  %></li>
+    <li><%= link_to "#{@tip.TipDesc_5}", "#{@tip.tipURL_5}" unless @tip.tipURL_5.nil?  %></li>
+    <li><%= link_to "#{@tip.TipDesc_6}", "#{@tip.tipURL_6}" unless @tip.tipURL_6.nil?  %></li>
+
+    
+  <% end %>
+  </div>
+  </ul>
+</div>

@@ -7,7 +7,7 @@
           <%= text_field_tag 'search', params[:search], :class => 'input-medium search-query', :data => { :provide => 'typeahead', :source => @subjects},
           :placeholder => 'Or Search...', :autocomplete => "off" %>
         <% end %>
-    
+ 
       
       <div id="subjectList">
         <%= render :partial => "search_list" %>
@@ -16,7 +16,7 @@
       
   </div>
   
-  <div class="span8" id="subResource"> 
+  <div class="span7 offset1" id="subResource"> 
     <%= render :partial => "resources/sublist" %>
   </div>
   

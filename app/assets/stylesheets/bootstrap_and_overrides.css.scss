@@ -1,0 +1,10 @@
+@import "bootstrap";
+/* body { padding-top: 60px; border: 10px solid #eaeaea; } */
+
+@media (min-width: 980px) {
+  body {
+    padding-top: 60px;
+    padding-bottom: 42px;
+  }
+}
+@import "bootstrap-responsive";

@@ -11,7 +11,7 @@ end
   def list
     
     if(params[:search])
-      @subjects = Subject.search(params[:search]).sorted
+      @subjects = Subject.search(params[:search]).sorted      
     else
       @subjects = Subject.sorted # all subjects with the order("subjects.SubjectName ASC")
     end
@@ -23,6 +23,7 @@ end
       end
       
       @subject = Subject.where(["SubjectID = ?", sid]).first
+      @tip = Subject.tips(sid).first
       @resources = Resource.relevant_on_subject(sid)
       @types = Type.type_on_subject(sid).skip.sorted
       
@@ -37,8 +38,11 @@ end
       render('list')
     end
     
+    # where clause will return an array, if you need single record, use first
+    
     @resources = Resource.relevant_on_subject(params[:subject])
     @subject = Subject.where(["SubjectID = ?", params[:subject]]).first
+    @tip = Subject.tips(params[:subject]).first
     @types = Type.type_on_subject(params[:subject]).skip.sorted
     
     @more_resources = get_more_resource(params[:subject],@types)
@@ -46,10 +50,10 @@ end
     # render :partial => "resources/sublist", :object => @resources
     if not @more_resources.nil?
          render :partial => "resources/sublist", :local => { :resources => @resources,
-      :subject => @subject, :types => @types, :more_resources => @more_resources }
+      :subject => @subject, :types => @types, :more_resources => @more_resources, :tip => @tip  }
     else
         render :partial => "resources/sublist", :local => { :resources => @resources,
-      :subject => @subject, :types => nil }
+      :subject => @subject, :types => nil, :tip => @tip }
     end
     
   end

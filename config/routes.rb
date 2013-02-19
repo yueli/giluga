@@ -3,6 +3,8 @@ Giluga::Application.routes.draw do
   # get "static_pages/home"
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
+ 
+  
   root to: 'home#index'
 
 # get "static_pages/about"
@@ -25,7 +27,7 @@ Giluga::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
    # match '/resource/:str' => 'resources#list'
     
-    match '/resource/:a' => 'resources#list'
+    match '/resource/:category' => 'resources#list'  # match resource/list?category='a' to resource/a
     
     match "/update_resources" => "subjects#update_resources"
     
@@ -80,4 +82,5 @@ Giluga::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   match ':controller(/:action(/:id))(.:format)'
+ 
 end

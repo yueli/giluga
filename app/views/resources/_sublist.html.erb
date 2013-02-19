@@ -1,6 +1,15 @@
 
 <div>
-  <h5><%= @subject.SubjectName %></h5>
+  <div class="row">
+  <div class="span6">
+  <h5><i class="icon-tag"></i> <%= @subject.SubjectName %> </h5>
+  </div>
+  <div class="span4 offset2">
+    <%= render :partial=>"/subjects/links", :locals => {:tip => @tip } %>
+  </div>
+  </div>
+  
+    
   <div id="tabs" class="tabbable">
 
   <ul class="nav nav-tabs" id="resourceTabs">
@@ -23,19 +32,19 @@
      <li>
       <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#<%=type.TypeID %>">
           <%= type.TypeName %>
-     </button>
+      </button>
     
-    <div id="<%=type.TypeID %>" class="collapse">
+      <div id="<%=type.TypeID %>" class="collapse">
           <%= render :partial=>"/resources/reslist", :locals=>{:collection => @more_resources[:"#{type.TypeID}"]} %>
-    </div>
-     
+      </div>
      </li>
 
      <% end %>
-  </ul>
-
-    </div>
+      </ul>
+       
+  </div>
     <% end %>
+
   </div>
   
   </div>

@@ -19,13 +19,15 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="#">Some Subject</a>
+        <%= link_to "GALILEO@UGA HOME", root_path, :class=>"brand" %>
+        
         <div class="nav-collapse">
           <ul class="nav">
-            <li><%= link_to "Browse Products" %></li>
-            <li><%= link_to "Price List" %></li>
-            <li><%= link_to "Contact Us" %></li>
-            <li><%= link_to "Cart" %></li>
+            <li><%= link_to "Password for Off-Campus Access", "http://www.libs.uga.edu/password.html" %></li>
+            <li><%= link_to "Reference Tools (encyclopedias, etc.)", :controller=>"subjects", :action=>"list", :subject=>"90" %></li>
+            <li><%= link_to "Electronic Journals Title Search", "http://www.libs.uga.edu/ejournals/" %></li>
+            <li><%= link_to "Working with Citations", "http://www.libs.uga.edu/ref/citation.html" %></li>
+            <li><%= link_to "Direct URLs for Databases and E-Journals", "http://www.libs.uga.edu/proxy_url.html" %></li>
           </ul>
         </div>
       </div>

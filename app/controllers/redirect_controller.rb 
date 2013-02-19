@@ -1,0 +1,7 @@
+class RedirectController < ApplicationController
+
+def index
+  product = Product.find(:first, :conditions => ["name LIKE ?", "#{params[:path].first}%"])
+  redirect_to product_path(product)
+end
+
