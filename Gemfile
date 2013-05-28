@@ -27,6 +27,10 @@ gem 'mysql2'
 
 gem 'jquery-rails'
 
+gem "capistrano", :group => :development
+
+gem 'therubyracer', require: "v8"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -64,5 +64,9 @@ module Giluga
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    # To remove the 304 not modified error which indicates the img/css/js don't need to transfer
+    # again since the server cached it already
+    config.assets.logger = false
   end
 end

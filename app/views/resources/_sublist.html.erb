@@ -20,31 +20,75 @@
   </ul>
 
   <div class="tab-content">
+    
+    
     <div class="tab-pane active" id="keyRes">
-      <%= render(:partial => "/resources/reslist" , :locals => {:collection => @resources }) %>
+    
+      
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+         Most Relevant Databases
+      </a>
     </div>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
+           <%= render :partial=>"/resources/reslist", :locals=>{:collection => @resources } %>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+        Related / Narrower Databases
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse">
+      <div class="accordion-inner">
+         <%= render :partial=>"/resources/reslist", :locals=>{:collection => @resourceNarrowers } %>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseThree">
+        Broader Databases
+      </a>
+    </div>
+    <div id="collapseThree" class="accordion-body collapse">
+      <div class="accordion-inner">
+         <%= render :partial=>"/resources/reslist", :locals=>{:collection => @resourceBroaders } %>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+
     <% if not @types.blank? %>
+      
     <div class="tab-pane" id="moreRes">
  
        <ul>
      <% @types.each do |type| %>
-     
-     <li>
-      <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#<%=type.TypeID %>">
-          <%= type.TypeName %>
-      </button>
+      <% if not @more_resources[:"#{type.TypeID}"].blank? %>
+        <li>
+         <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#<%=type.TypeID %>">
+           <%= type.TypeName %>
+         </button>
     
-      <div id="<%=type.TypeID %>" class="collapse">
-          <%= render :partial=>"/resources/reslist", :locals=>{:collection => @more_resources[:"#{type.TypeID}"]} %>
-      </div>
-     </li>
+         <div id="<%=type.TypeID %>" class="collapse">
+           <%= render :partial=>"/resources/reslist", :locals=>{:collection => @more_resources[:"#{type.TypeID}"]} %>
+         </div>
+        </li>
+      <% end %>
 
      <% end %>
-      </ul>
-       
-  </div>
+      </ul>       
+    </div>
+  
     <% end %>
-
+    
   </div>
   
   </div>

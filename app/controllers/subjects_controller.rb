@@ -25,6 +25,8 @@ end
       @subject = Subject.where(["SubjectID = ?", sid]).first
       @tip = Subject.tips(sid).first
       @resources = Resource.relevant_on_subject(sid)
+      @resourceNarrowers = Resource.narrower_on_subject(sid)
+      @resourceBroaders = Resource.broader_on_subject(sid)
       @types = Type.type_on_subject(sid).skip.sorted
       
       @more_resources = get_more_resource(sid,@types)
@@ -41,6 +43,9 @@ end
     # where clause will return an array, if you need single record, use first
     
     @resources = Resource.relevant_on_subject(params[:subject])
+    @resourceNarrowers = Resource.narrower_on_subject(params[:subject])
+    @resourceBroaders = Resource.broader_on_subject(params[:subject])
+    
     @subject = Subject.where(["SubjectID = ?", params[:subject]]).first
     @tip = Subject.tips(params[:subject]).first
     @types = Type.type_on_subject(params[:subject]).skip.sorted
@@ -48,11 +53,13 @@ end
     @more_resources = get_more_resource(params[:subject],@types)
     
     # render :partial => "resources/sublist", :object => @resources
-    if not @more_resources.nil?
+    if not @more_resources.blank?
          render :partial => "resources/sublist", :local => { :resources => @resources,
+     #     :resourceNarrowers => @resources, :resourceBroaders => @resources,
       :subject => @subject, :types => @types, :more_resources => @more_resources, :tip => @tip  }
     else
         render :partial => "resources/sublist", :local => { :resources => @resources,
+      #  :resourceNarrowers => @resources, :resourceBroaders => @resources,
       :subject => @subject, :types => nil, :tip => @tip }
     end
     
