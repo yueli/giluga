@@ -1,11 +1,11 @@
       
-<div class="row"> 
 
-<div class="span5">
-<div class="logo"><a href="http://www.libs.uga.edu">University of Georgia Libraries</a></div>
+<div class="row">
+<div class="span6">
+<div class="logo"><a href="http://www.libs.uga.edu" target="_blank">University of Georgia Libraries</a></div>
 </div>
 
-<div class="span6 offset1">
+<div class="span6">
 <div id="searchbox">
 <!-- start query form -->
 <form id="cse-search-box" action="http://www.libs.uga.edu/search/">
@@ -22,8 +22,5 @@
 </div> <!--  row    -->
 
 
-<div class="brand">
- 
-<img src="http://www.libs.uga.edu/research/images/headergraphic.jpg" border="0" alt="GALILEO@UGA" class="responsive-image">
-     
-</div>
+    <%= link_to image_tag( "http://www.libs.uga.edu/research/images/headergraphic.jpg", :border=>0 ), root_path, :class=>"brand" %>
+

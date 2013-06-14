@@ -4,7 +4,7 @@
     <% collection.each do |resource| %>
     
       <% if resource.parenthetical.blank? then @record_title=resource.name else @record_title=resource.name+'('+resource.parenthetical+')' end %>
-      <ul class="unstyled">
+      <ul class="level2">
       <% if resource.PublicURL.nil? %>
            <li><%= @record_title %></li>
       <% else %>
@@ -42,8 +42,8 @@
       <% end %>
     
     <% if not resource.cookie.blank? %>
-        <li><font color='#860000'>Internet Explorer Users: cookies must be set to
-       <%= resource.cookie %> for this database to function properly.</font></li>
+        <p><font color='#860000'>Internet Explorer Users: cookies must be set to
+       <%= resource.cookie %> for this database to function properly.</font></p>
     <% end %>
     <br>
       

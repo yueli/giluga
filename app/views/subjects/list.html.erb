@@ -1,5 +1,5 @@
 
-  <div class="span4">
+  <div class="span5">
     
         <%= form_tag("list", :method=>'get', :class => "navbar-search pull-left") do %>
           <%= label_tag "subject", "Choose Subject" %>
@@ -16,7 +16,7 @@
       
   </div>
   
-  <div class="span7 offset1" id="subResource"> 
+  <div class="span7" id="subResource"> 
     <%= render :partial => "resources/sublist" %>
   </div>
   

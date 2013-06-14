@@ -2,9 +2,9 @@
 <div>
   <div class="row">
   <div class="span6">
-  <h5><i class="icon-tag"></i> <%= @subject.SubjectName %> </h5>
+  <h3><i class="icon-tag"></i> <%= @subject.SubjectName %> </h3>
   </div>
-  <div class="span4 offset2">
+  <div class="span4 offset1">
     <%= render :partial=>"/subjects/links", :locals => {:tip => @tip } %>
   </div>
   </div>
@@ -26,6 +26,8 @@
     
       
 <div class="accordion" id="accordion2">
+  <ul class="unstyled level1">
+  <li>
   <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
@@ -38,6 +40,8 @@
       </div>
     </div>
   </div>
+  </li>
+  <li>
   <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
@@ -50,6 +54,8 @@
       </div>
     </div>
   </div>
+  </li>
+  <li>
   <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseThree">
@@ -62,6 +68,8 @@
       </div>
     </div>
   </div>
+  </li>
+  </ul>
 </div>
     </div>
 
@@ -69,7 +77,7 @@
       
     <div class="tab-pane" id="moreRes">
  
-       <ul>
+       <ul class="unstyled level1">
      <% @types.each do |type| %>
       <% if not @more_resources[:"#{type.TypeID}"].blank? %>
         <li>

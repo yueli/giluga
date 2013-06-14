@@ -1,7 +1,7 @@
 <% provide(:title, 'GALILEO@UGA :: UGA Libraries') %>
 
     <div class="row">
-    <div class="span6"><h4> Search Options: </h4></div>
+    <div class="span6"> <h2> Search Options: </h2></div>
     <div class="span4 offset2"><%= render(:partial => "links" ) %></div>
     </div>
 
@@ -40,13 +40,13 @@
     
       <br>
         
-        <h5>Select a Resource by Name:  </h5>
+        <label class='control-label bold' >Select a Resource by Name:  </label>
     
           
          <%= render(:partial => "/resources/atoz" ) %>
 
   <br>
-    <h5>Or Search for a Resource by Name:</h5>
+    <label class='control-label bold' >Or Search for a Resource by Name:</label>
        
         <%= form_tag "/resources/list", :class =>"form-inline" do -%>
     

@@ -4,7 +4,7 @@
 
     
     <%= select_tag "subject", options_from_collection_for_select(@subjects, 'SubjectID', 'SubjectName', (@subject.SubjectID unless @subject.nil?)),
-      :size => '25', :remote => 'true', :onchange => "update_resource_div(this.value)" %>
+      :size => '25', :style => "width:260px", :remote => 'true', :onchange => "update_resource_div(this.value)" %>
 
     <% end %>
     </div>

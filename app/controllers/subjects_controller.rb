@@ -1,6 +1,6 @@
 class SubjectsController < ApplicationController
 
- layout 'chooseSub'
+ layout 'category'
  
 def index
   list

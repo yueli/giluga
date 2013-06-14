@@ -1,14 +1,13 @@
 <div class='fullinfo'>
       <ul class="unstyled">
       <% if not resource.ResourceSubjectDesc.blank? %>
-            <li><%= resource.ResourceSubjectDesc %></li>
+            <li><%= raw resource.ResourceSubjectDesc %></li>
       <% elsif not resource.description.blank? %>
-            <li><%= resource.description %></li>";
+            <li><%= raw resource.description %></li>
       <% end %>
       
-      
       <% if not resource.see_also.blank? %>
-         <li><strong>See also: </strong><%=raw resource.see_also %></li>
+         <li><strong>See also: </strong><%= raw resource.see_also %></li>
       <% end %>
       <% if not resource.coverage.blank? %>
          <li><strong>Coverage Dates: </strong><%= resource.coverage %></li>
