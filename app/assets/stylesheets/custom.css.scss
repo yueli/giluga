@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
 /* mixins, variables, etc. */
-$linkColor:      #ff0000;
-$linkColorHover: #0000ff;
+$linkColor:      #860000;
+$linkColorBesideImage: #0088CC;
+$linkColorHover: #3e3e6a;
 $black: #000;
 $greyLighter: lighten($black, 90%);  /* $grayMediumLight: #eaeaea;*/
 $darkRed: #666666;
@@ -37,7 +38,7 @@ html, body, div, section, article, aside, header, hgroup, footer, nav, h1, h2, h
 body {
 	line-height: 1.5;
 	position: relative;
-	background: #fff;
+	background-color: $greyLighter;
 	color: rgb(76, 67, 65);
 	font-weight:normal;
 	font-style:normal;
@@ -45,21 +46,43 @@ body {
         font-size: 13px;
 }
 
-.container {
-  width:90%;
+#main .container {
+  margin-top: -12px;
+  width:780px;
   padding: 1em 2.76%;
-  
+  background: #fff;
+  box-shadow: 3px 3px 3px darkgray;
 }
 
 #main {
-    //margin-top: 80px;
+   // margin-top: 140px;
     //padding-top: 20px;
     display:block;
     position:relative;
 }
 
+
 html {
   overflow-y: scroll;
+}
+
+
+.crumbtrail {
+    color: #860000;
+    font-size: 12px;
+    font-weight: normal;
+    margin-bottom: 20px;
+    a {
+      color: #3e3e6a;
+      text-decoration: none;
+    }
+    a &:hover {
+      color: #860000;
+    }
+}
+
+.row {
+  margin-right: -20px;
 }
 
 section {
@@ -85,11 +108,11 @@ textarea {
 
 #wrapper  {
 
-text-align: left;
-width: 736px;
-margin-left: auto;
-margin-right: auto;
-padding: 10px;
+  text-align: left;
+  width: 736px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
 
 }
 
@@ -102,7 +125,8 @@ padding: 10px;
       margin-bottom: 5px;
     }
     li {
-      padding: 10px 5px 5px 0;
+      padding: 10px 5px 5px 15px;
+      text-decoration: none;
     }
 }
 
@@ -119,6 +143,18 @@ padding: 10px;
     color:#3e3e6a;
     &:hover { background:grey; color:#999; }
   }
+}
+
+.dropdown-menu {
+  background-color: #9FD9E6;
+  /*background: transparent;*/
+  z-index:99;
+  left: auto;
+  right: 0;
+  text-align: right;
+}
+.btn-group > .btn, .btn-group > .dropdown-menu {
+    font-size: 12px;
 }
 
 #subjectList {
@@ -159,17 +195,37 @@ p {
   line-height: 1.7em;
 }
 
+.content > .row {
+  margin-top: 15px;
+  margin-left: 0px;
+  
+}
+.subtitle {
+  float: left;
+}
+
+.helplinks {
+  float: right;
+}
+
+#subResource {
+  float: right;
+
+}
+
+.row-fluid [class*="span"]  {
+  margin: 0 0 0 0;
+}
 
 .galileo  {
 
-margin: 0;
-padding: 0;
-width: 88%;
-text-align: right;
-color:#3e3e6a;  
-font-size: 12px; 
-font-weight: normal;
-text-decoration: none;
+  float: right;
+  text-align: right;
+  color:#3e3e6a;  
+  font-size: 12px; 
+  font-weight: normal;
+  text-decoration: none;
+  
 }
 
 label.control-label {
@@ -200,6 +256,41 @@ div.right-col {
 
 /* header */
 
+header {
+  pading: 1em 2.76%;
+  position: relative;
+  z-index: 1000;
+
+}
+
+.navbar .container {
+  width: 780px;
+}
+
+header .logo {
+  float: left;
+  font-family:tahoma; 
+  font-size: 23px; 
+  letter-spacing: 0em;
+  padding-top: 20px;
+  font-weight: normal;
+  line-height: 1;
+  a {
+    color: #fff;
+    text-decoration: none;
+  }  
+}
+
+header #searchbox {
+  float: right;
+  font-family:tahoma; 
+  color:#ffffff;
+  font-size:11px; 
+  font-weight:normal;
+  padding: 20px 0px 0px;
+}
+
+/*
 .logo {
   float: left;
   top: 20px;
@@ -215,19 +306,15 @@ div.right-col {
     text-decoration: none;
   }  
 }
-
-#cse-search-box {
-  margin: 0px;
-}
+*/
 
 .navbar .brand {
     color: #fff;
     display: block;
-    float: left;
     font-size: 20px;
     font-weight: 200;
     margin-left: -20px;
-    padding: 10px 20px 0px 20px;
+    padding: 10px 20px 0px 0px;
     text-shadow: 0 0px 0 grey;
 }
 
@@ -246,63 +333,45 @@ div.right-col {
   background-repeat: no-repeat;
   color:#ffffff;
   filter: none;
-
+  padding-left: 2.3%;
+  padding-bottom: .3em;
   /* height: 70px; */
 
 }
 
 #headername {
   
-position:relative;
-top:20px;
-left:10px;
-padding:0px;
-font-family:tahoma; 
-color:#ffffff;
-font-size:23px; 
-font-weight:normal;
+  position:relative;
+  top:20px;
+  left:10px;
+  padding:0px;
+  font-family:tahoma; 
+  color:#ffffff;
+  font-size:23px; 
+  font-weight:normal;
 }
 
-#searchbox  {
-
-font-family:tahoma; 
-color:#ffffff;
-font-size:11px; 
-font-weight:normal;
-padding: 20px 0px 0px 0px;
-
+#cse-search-box {
+  margin: 0px;
 }
 
+/* To extend the length of the image so that it aligned with the row above */
 .portalheader {
-position: relative;
-top: 0px;
-left: 10px;
-width: 100%;
-height: 37px;
-background-color: #f1e5ab;
-padding: 0px 0px 0px 0px;
-margin-top: 0px;
-
-}
-
-.portalheader img {
-float: left;
-max-width: 100%;
-}
-
-.portalheader h2  {
-
-font-family:garamond; 
-color:#860000;
-font-size:17px; 
-font-weight:bold;
-text-align: center;
-margin-top: 0px;
-padding-top: 12px;
-margin-bottom: 0px;
+  position: relative;
+  top: 0px;
+  width: 100%;
+  height: 40px;
+  background-color: #f1e5ab;
 }
 
 .responsive-image { max-width:100%;}
+
+/* -60px will make left panel closer to right panel,
+  but will lost left part if the width of browser reduced */
+
+.tabbable {
+  margin-left: -20px;  
+}
 
 #tabs {
   padding-top: 25px;
@@ -338,60 +407,7 @@ ul.level2 {
   padding-bottom: 1.5em;
 }
 
-/* footer */
 
-.footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  font-size: 11px;
-  color: #999;
-  leftfooter {
-    float:left;
-    ul {
-      display: block;
-      list-style: none outside none;
-      margin-bottom: 0;
-      margin-top: 8px;
-    }
-    li {
-    margin-left: -10px;
-    }
-  }
-  
-  a {
-    color: #8C1717;
-  }
-  &:hover {
-    color: #222;
-  }
-  small {
-  float: left;
-  }
-
-}
-
-.ugalogo {
-    border: medium none;
-    clear: right;
-    float: right;
-    padding: 5px;
-}
-
-.uga {
-    font-size: 14px;
-    margin-top: 0px;
-}
-
-/* miscellaneous */
-
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-  @include box_sizing;
-}
 
 /* sidebar */
 
@@ -423,26 +439,105 @@ aside {
   margin-right: 10px;
 }
 
-/* convert from CSS to SCSS
-footer a {
-  color: #555;
-}  
+/* convert from CSS to SCSS */
+/* footer */
 
-footer a:hover { 
-  color: #222;
+.footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  font-size: 11px;
+  color: #999;
 }
 
-footer small {
+.footer a {  
+    color: $linkColor;
+}
+
+.footer a:hover {
+  color: $linkColorHover;
+}
+
+.footer .copyright {
   float: left;
 }
 
-footer ul {
-  float: right;
-  list-style: none;
+.footer .icon {
+    
+    float: right;
+    
+    & a :link {
+      color: $linkColorBesideImage;
+    }
+    
+  
+    & img {
+      max-width: none;
+      vertical-align: middle;
+    }
 }
 
-footer ul li {
-  float: left;
-  margin-left: 10px;
+/* CSS clean up on July 26th
+ *
+ *
+== footer ===
+
+.leftfooter {
+    float:left;
+    ul {
+     display: block;
+      list-style: none outside none;
+      margin-bottom: 0;
+      margin-top: 8px;
+    }
 }
-*/
+  
+.leftfooter > ul > li {
+  margin-left: -10px;  
+  a {
+    color: #8C1717;
+    &:hover {  color: #222; }   
+  }
+  small {
+  float: left;
+  }
+
+}
+
+.footer .ugalogo {
+    border: medium none;
+    clear: right;
+    float: right;
+    padding: 5px;
+}
+
+.footer .uga {
+    float:right;
+    clear:left;
+    margin-top:-25px;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#666666; 
+    font-size:14px;
+    & a:link {
+      color: $linkColor;
+      text-decoration: none;
+    }
+    & a:hover {
+      color: $linkColorHover;
+      text-decoration: underline;
+    }
+}
+ */
+
+
+
+/* miscellaneous (not in use) */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+

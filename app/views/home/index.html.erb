@@ -1,14 +1,14 @@
 <% provide(:title, 'GALILEO@UGA :: UGA Libraries') %>
 
-    <div class="row">
-    <div class="span6"> <h2> Search Options: </h2></div>
-    <div class="span4 offset2"><%= render(:partial => "links" ) %></div>
-    </div>
+   <!-- <div class="row crumbtrail">
+      <a href="/">| Home |</a>
+   </div> -->
 
-              
-            
+   <div class="row">
+    <div class="subtitle"> <h2> Search Options: </h2></div>
+    <div class="helplinks"><%= render(:partial => "links" ) %></div>
+   </div>
 
-  
 
 <script src="http://supportforms.epnet.com/eit/scripts/ehostsearch.js" type="text/javascript" defer="defer"></script>
 <script type="text/javascript">var url="http://preproxy.galib.uga.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&site=ehost-live&scope=site&type=1&db=a9h&authtype=cookie,ip,uid&bquery=";</script>
@@ -22,7 +22,7 @@
        </div>
         <span class="help-inline">in Academic Search Complete</span>
         </form>
-<br>
+
        
   
       <form class="form-inline" id = 'popular'>
@@ -30,7 +30,6 @@
        <%= select_tag "link", options_from_collection_for_select(@popular_db, 'code', 'name', '0'), {:onChange => "{getResult();}"} %>
        </form>
       
-      <br>
       
         <%= form_tag "subjects/list", :class=>"form-inline" do %>
         <label class='control-label bold' >Choose Subject: </label>
@@ -66,13 +65,16 @@
        </div>
       
         <% end %> 
-      
+     
+  <br> 
+  
     <div class="galileo">
-
-    <img src="http://www.libs.uga.edu/research/images/fundbygalileo.gif" align="bottom" alt="GALILEO Logo" />
-    <a href="http://www.galileo.usg.edu">
-    Go to statewide GALILEO interface
-    </a>
- 
+      <img src="http://www.libs.uga.edu/research/images/fundbygalileo.gif" align="bottom" alt="GALILEO Logo" />
+      <a href="http://www.galileo.usg.edu">
+      Go to statewide GALILEO interface
+      </a>
     </div>
+    
+   
+
 
