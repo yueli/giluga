@@ -1,26 +1,21 @@
 
   <div class="row crumbtrail">
-      <a href="/">Home >></a>
+      <a href="<%= home_path %>">Home >></a>
       Resource By Subject
   </div>
-  
 
-  
   <div class="span5">
-    
-        <%= form_tag("list", :method=>'get', :class => "navbar-search pull-left") do %>
+      <!-- Autocomplete on a form can cause the observe_field not to fire, solution is set it to off -->
+        <%= form_tag("list", :method=>'post', :class => "navbar-search pull-left") do %>
           <%= label_tag "subject", "Choose Subject" %>
 
           <%= text_field_tag 'search', params[:search], :class => 'input-medium search-query', :data => { :provide => 'typeahead', :source => @subjects},
-          :placeholder => 'Or Search...', :autocomplete => "off" %>
+          :placeholder => 'Or Search...' %>
         <% end %>
- 
       
-      <div id="subjectList">
-        <%= render :partial => "search_list" %>
-      </div>
-    
-      
+        <div id="subjectList">      
+             <%= render :partial => "search_list" %>
+        </div>     
   </div>
   
   <div class="span7" id="subResource"> 

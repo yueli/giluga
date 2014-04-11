@@ -1,5 +1,8 @@
 class Type < ActiveRecord::Base
   
+  
+  set_table_name 'Types'
+  set_primary_key 'TypeID'
  
   attr_accessible :TypeID, :TypeName
   scope :broader_on_subject, lambda {|arg| select('*, IFNULL(sort_name,name) AS Title').\

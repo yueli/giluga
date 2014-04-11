@@ -1,23 +1,21 @@
 Giluga::Application.routes.draw do
-  
+
   # get "static_pages/home"
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
  
-  
   root to: 'home#index'
 
+  get 'home' => 'home#index', as: 'home'
+  
 # get "static_pages/about"
-  match '/demo', to: 'home#demo'
-  match '/demo2', to: 'home#demo2'
+  match 'demo', to: 'home#demo'
 
   # get "static_pages/help"
-  match '/help', to: 'static_pages#help'
+  match 'help', to: 'static_pages#help'
   
   # get "static_pages/about"
-  match '/about', to: 'static_pages#about'
-
-
+  match 'about', to: 'static_pages#about'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -27,11 +25,13 @@ Giluga::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
    # match '/resource/:str' => 'resources#list'
     
-    match '/resource/:category' => 'resources#list'  # match resource/list?category='a' to resource/a
-    
-    match "/update_resources" => "subjects#update_resources"
-    
-   
+  # match resource/list?category='a' to resource/a
+  match 'resource/:category' => 'resources#list', :as => 'atoz'
+  
+  # match subject/list?subject='chemistry' to subject/chemistry
+  match 'subject/:subject' => 'subjects#list', :as => 'subname'  
+  
+  match "refresh" => "subjects#refresh"  # match "/update_resources" => "subjects#update_resources"
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
@@ -82,5 +82,12 @@ Giluga::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   match ':controller(/:action(/:id))(.:format)'
+  
+  #Last route in routes.rb
+  # match '*a', :to => 'home#routing_error'
+  
+  #unless Rails.application.config.consider_all_requests_local
+    match '*not_found', to: 'errors#error_404'
+  #end
  
 end

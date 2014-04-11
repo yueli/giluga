@@ -41,8 +41,24 @@ function getResult() {
     }
     
 }  
- 
-function update_resource_div(subject) {  
+
+function refresh_resource_div() {  
+  jQuery.ajax({
+    url: "/research/subjects/refresh",
+    type: "GET",
+    data: {
+        "subject" : $('#subject_select').val()
+        },
+    dataType: "script" 
+    
+    })
+}
+
+/* tabbable tabs for more resources on specific subject */
+
+/* replaced by refresh_resource_div */
+/*
+ *function update_resource_div(subject) {  
   jQuery.ajax({
     url: "/update_resources",
     type: "GET",
@@ -53,7 +69,4 @@ function update_resource_div(subject) {
     }
     })
 }
-
-/* tabbable tabs for more resources on specific subject */
-
-   
+*/

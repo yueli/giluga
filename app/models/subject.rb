@@ -1,5 +1,8 @@
 class Subject < ActiveRecord::Base
   
+  set_table_name 'Subjects'
+  set_primary_key 'SubjectID'
+  
   attr_accessible :SubjectName, :TipDesc_1, :tipURL_1, :TipDesc_2, :tipURL_2, :TipDesc_3, :tipURL_3,
   :TipDesc_4, :tipURL_4, :TipDesc_5, :tipURL_5, :TipDesc_6, :tipURL_6
   
@@ -17,7 +20,7 @@ class Subject < ActiveRecord::Base
   #scope :visible, where(:visible => true)
   scope :tips, lambda {|arg| where(["SubjectID = ?", "#{arg}"]) }
     
-  scope :sorted, order('subjects.SubjectName ASC')
+  scope :sorted, order('Subjects.SubjectName ASC')
   #scope :sorted2, order('subjects.SubjectName DESC')
   
   scope :search, lambda {|query| where(["SubjectName LIKE ?", "%#{query}%"])}

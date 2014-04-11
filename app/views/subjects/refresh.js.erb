@@ -1,0 +1,17 @@
+
+
+/*  render :partial => "resources/sublist" */
+$("#subResource").html("<%= escape_javascript( render( :partial => "resources/sublist",
+        :local => { :resources => @resources, :subject => @subject, :types => @types,
+                                    :more_resources => @more_resources, :tip => @tip  } )) %>");
+
+
+/*
+$('#sub_selection').live('change', function(){
+  $.ajax({
+    url: "subjects/list",
+    type: "GET",
+    data: {'subject=' + $('#sub_selection option:selected').value() },
+  })
+});
+*/

@@ -100,11 +100,7 @@ textarea {
   }
 }
 
-.bold {
-  font-weight: bold;
-}
-
-
+.bold {  font-weight: bold;  }
 
 #wrapper  {
 
@@ -119,14 +115,19 @@ textarea {
 .fullinfo {
     background-color: #EFEFE9;
     border: 1px solid #3E3E6A;
-    margin-bottom: 5px;
+    margin: 10px 0px;
     padding: 10px;
+
     ul {
-      margin-bottom: 5px;
+      padding-top: 10px;
     }
     li {
-      padding: 10px 5px 5px 15px;
+      padding-bottom: 10px;
       text-decoration: none;
+      p{
+        font-size: inherit;
+        line-height: inherit;
+        padding-top: 10px; }
     }
 }
 
@@ -153,13 +154,9 @@ textarea {
   right: 0;
   text-align: right;
 }
-.btn-group > .btn, .btn-group > .dropdown-menu {
-    font-size: 12px;
-}
+.btn-group > .btn, .btn-group > .dropdown-menu {   font-size: 12px; }
 
-#subjectList {
-  padding: 0px 0px 0px 0;
-}
+#subjectList { padding: 0px 0px 0px 0; }
 
 /* typography */
 
@@ -290,24 +287,6 @@ header #searchbox {
   padding: 20px 0px 0px;
 }
 
-/*
-.logo {
-  float: left;
-  top: 20px;
-  margin-right: 10px;
-  font-family:tahoma; 
-  font-size: 23px; 
-  letter-spacing: 0em;
-  padding-top: 20px;
-  font-weight: normal;
-  line-height: 1;
-  a {
-    color: #fff;
-    text-decoration: none;
-  }  
-}
-*/
-
 .navbar .brand {
     color: #fff;
     display: block;
@@ -407,8 +386,6 @@ ul.level2 {
   padding-bottom: 1.5em;
 }
 
-
-
 /* sidebar */
 
 aside {
@@ -476,59 +453,6 @@ aside {
       vertical-align: middle;
     }
 }
-
-/* CSS clean up on July 26th
- *
- *
-== footer ===
-
-.leftfooter {
-    float:left;
-    ul {
-     display: block;
-      list-style: none outside none;
-      margin-bottom: 0;
-      margin-top: 8px;
-    }
-}
-  
-.leftfooter > ul > li {
-  margin-left: -10px;  
-  a {
-    color: #8C1717;
-    &:hover {  color: #222; }   
-  }
-  small {
-  float: left;
-  }
-
-}
-
-.footer .ugalogo {
-    border: medium none;
-    clear: right;
-    float: right;
-    padding: 5px;
-}
-
-.footer .uga {
-    float:right;
-    clear:left;
-    margin-top:-25px;
-    font-family:Arial, Helvetica, sans-serif;
-    color:#666666; 
-    font-size:14px;
-    & a:link {
-      color: $linkColor;
-      text-decoration: none;
-    }
-    & a:hover {
-      color: $linkColorHover;
-      text-decoration: underline;
-    }
-}
- */
-
 
 
 /* miscellaneous (not in use) */

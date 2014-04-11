@@ -18,3 +18,5 @@
 # asset pipeline
 .sass-cache/
 public/assets/
+# Ignore application configuration
+/config/application.yml

@@ -1,12 +1,12 @@
 class Static < ActiveRecord::Base
   
-  LOGO_DISPLAY_2 = "<img src='/assets/fundbyuga.gif' title='Funded by the UGA Libraries' alt='Funded by the UGA Libraries'>"
-  LOGO_DISPLAY_1 = "<img src='/assets/fundbygalileo.gif' title='Funded by GALILEO' alt='Funded by GALILEO'>"
-  LOGO_DISPLAY_3 = "<img src='/assets/fundbylaw.gif' title='Funded by the UGA Law Library' alt='Funded by the UGA Law Library'>"
+  LOGO_DISPLAY_2 = '<img src="../assets/fundbyuga.gif" title="Funded by the UGA Libraries" alt="Funded by the UGA Libraries">'
+  LOGO_DISPLAY_1 = "<img src='../assets/fundbygalileo.gif' title='Funded by GALILEO' alt='Funded by GALILEO'>"
+  LOGO_DISPLAY_3 = "<img src='../assets/fundbylaw.gif' title='Funded by the UGA Law Library' alt='Funded by the UGA Law Library'>"
   LOGO_DISPLAY_4 = LOGO_DISPLAY_2 + LOGO_DISPLAY_3
   LOGO_DISPLAY_5 = LOGO_DISPLAY_2 + LOGO_DISPLAY_1
   
-  NEW_ICON = "<img src='/assets/new.gif' title='New Database'>"
+  NEW_ICON = "<img src='../assets/new.gif' title='New Database'>"
   
   ACCESS_TYPE_1 = "<strong>Online Access:</strong> On Campus Only<br>"
   ACCESS_TYPE_2 = "<strong>Online Access:</strong> On/Off Campus.
@@ -30,7 +30,15 @@ class Static < ActiveRecord::Base
                    {"key"=>"E", "value"=>'e'},{"key"=>"F", "value"=>'f'},{"key"=>"G", "value"=>'g'},{"key"=>"H", "value"=>'h'},{"key"=>"I", "value"=>'i'},{"key"=>"J", "value"=>'j'},{"key"=>"K", "value"=>'k'},
                    {"key"=>"L", "value"=>'l'},{"key"=>"M", "value"=>'m'},{"key"=>"N", "value"=>'n'},{"key"=>"O", "value"=>'o'},{"key"=>"P", "value"=>'p'},{"key"=>"R", "value"=>'r'},
                    {"key"=>"S", "value"=>'s'},{"key"=>"T", "value"=>'t'},{"key"=>"U", "value"=>'u'},{"key"=>"V", "value"=>'v'},{"key"=>"W", "value"=>'w'},{"key"=>"Z", "value"=>'z'},{"key"=>"A-Z", "value"=>'all'}]
-  
-  
+
+  POP_DB_LIST = [["-Select a Database-", "0"],
+                 ["Academic Search Complete (General/Multidisciplinary)", "zbac"],
+                 ["Business Source Complete", "zbbc"],
+                 ["ERIC", "zber"],
+                 ["JSTOR", "xjst-uga1"],
+                 ["Lexis/Nexis", "zxau"],
+                 ["PsycINFO", "zbpy"],
+                 ["Science Direct", "xsdi-uga1"],
+                 ["Web of Science", "xwos-uga1"]]
   
 end

@@ -1,10 +1,15 @@
     <div>
-    <%= form_tag("list", :method=>'get', :class => 'form-horizontal',
+    <%= form_tag("refresh", :method=>'post', :class => 'form-horizontal', :autocomplete => :off,
                  :id => 'find_res_by_subject') do %>
 
     
     <%= select_tag "subject", options_from_collection_for_select(@subjects, 'SubjectID', 'SubjectName', (@subject.SubjectID unless @subject.nil?)),
-      :size => '25', :style => "width:260px", :remote => 'true', :onchange => "update_resource_div(this.value)" %>
+      :size => '25', :style => "width:260px", :remote => 'true', :onchange => "refresh_resource_div();", :id => 'subject_select' %>
 
     <% end %>
     </div>
+    
+    <!--
+   <%= select_tag "subject", options_from_collection_for_select(@subjects, 'SubjectID', 'SubjectName', (@subject.SubjectID unless @subject.nil?)),
+      :size => '25', :style => "width:260px", :remote => 'true', :onchange => "update_resource_div(this.value)", :id => 'subjects_select' %>
+    -->

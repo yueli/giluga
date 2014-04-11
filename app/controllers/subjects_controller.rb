@@ -2,26 +2,33 @@ class SubjectsController < ApplicationController
 
  layout 'category'
  
-def index
-  list
-  render('list')
-  
-end
+  def index
+   list
+   render('list')
+  end
 
   def list
     
-    if(params[:search])
-      @subjects = Subject.search(params[:search]).sorted      
-    else
-      @subjects = Subject.sorted # all subjects with the order("subjects.SubjectName ASC")
-    end
-     
+    #  Initialize @subjects to all subjects with the order("subjects.SubjectName ASC")
+    #  Then set the subject id to the selected id from index page, otherwise the first one of @subjects from above  
+    #  If search input field has any input, @subjects will be overwritten
+    #  and subject id will be the first record of @subjects
+    
+      @subjects = Subject.sorted
+      
       if (params[:subject])
         sid = params[:subject]
       else
-        sid = '1'
+         sid = @subjects[0].SubjectID   
       end
       
+      if params[:search] and (not Subject.search(params[:search])[0].nil?)
+             @subjects = Subject.search(params[:search]).sorted
+             sid = @subjects[0].SubjectID
+      end
+      
+    # Get info for this selected subject
+    
       @subject = Subject.where(["SubjectID = ?", sid]).first
       @tip = Subject.tips(sid).first
       @resources = Resource.relevant_on_subject(sid)
@@ -30,39 +37,27 @@ end
       @types = Type.type_on_subject(sid).skip.sorted
       
       @more_resources = get_more_resource(sid,@types)
-    
+      
+      respond_to do |format|
+       format.html # show.html.erb
+      end
   end
+
+  def refresh
+      @subjects = Subject.sorted
+      @subject = Subject.where(["SubjectID = ?", params[:subject]]).first
+      @tip = Subject.tips(params[:subject]).first
+      @types = Type.type_on_subject(params[:subject]).skip.sorted
+      
+      @resources = Resource.relevant_on_subject(params[:subject])
+      @resourceNarrowers = Resource.narrower_on_subject(params[:subject])
+      @resourceBroaders = Resource.broader_on_subject(params[:subject])
+      
+      @more_resources = get_more_resource(params[:subject],@types)
   
-  def update_resources
-    
-    if not params[:subject]
-      list
-      render('list')
-    end
-    
-    # where clause will return an array, if you need single record, use first
-    
-    @resources = Resource.relevant_on_subject(params[:subject])
-    @resourceNarrowers = Resource.narrower_on_subject(params[:subject])
-    @resourceBroaders = Resource.broader_on_subject(params[:subject])
-    
-    @subject = Subject.where(["SubjectID = ?", params[:subject]]).first
-    @tip = Subject.tips(params[:subject]).first
-    @types = Type.type_on_subject(params[:subject]).skip.sorted
-    
-    @more_resources = get_more_resource(params[:subject],@types)
-    
-    # render :partial => "resources/sublist", :object => @resources
-    if not @more_resources.blank?
-         render :partial => "resources/sublist", :local => { :resources => @resources,
-     #     :resourceNarrowers => @resources, :resourceBroaders => @resources,
-      :subject => @subject, :types => @types, :more_resources => @more_resources, :tip => @tip  }
-    else
-        render :partial => "resources/sublist", :local => { :resources => @resources,
-      #  :resourceNarrowers => @resources, :resourceBroaders => @resources,
-      :subject => @subject, :types => nil, :tip => @tip }
-    end
-    
+      respond_to do |format|
+          format.js
+      end
   end
   
   def show

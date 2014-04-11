@@ -14,7 +14,7 @@
 <script type="text/javascript">var url="http://preproxy.galib.uga.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&site=ehost-live&scope=site&type=1&db=a9h&authtype=cookie,ip,uid&bquery=";</script>
 <br>
       
-        <form class="form-inline" id="ehost_searchbox" action="javascript:ebscoHostSearchGo(url);">
+        <form class="form-inline" id="ehost_searchbox" action="javascript:ebscoHostSearchGo(url);" autocomplete="off">
         <label class='control-label bold' for="ebscohostsearch">Quick Search: </label> 
         <div class="input-append">
         <input class="span2" id="ebscohostsearch" type="text" >
@@ -25,13 +25,14 @@
 
        
   
-      <form class="form-inline" id = 'popular'>
-         <label class='control-label bold' >Popular Databases: </label>
-       <%= select_tag "link", options_from_collection_for_select(@popular_db, 'code', 'name', '0'), {:onChange => "{getResult();}"} %>
-       </form>
+      <form class="form-inline" id = 'popular' autocomplete="off">
+       <label class='control-label bold' >Popular Databases: </label>
+      
+       <%= select_tag "link", options_for_select(Static::POP_DB_LIST), {:onChange => "{getResult();}"} %>
+      </form>
       
       
-        <%= form_tag "subjects/list", :class=>"form-inline" do %>
+        <%= form_tag "subjects/list", :class=>"form-inline", :autocomplete => :off do %>
         <label class='control-label bold' >Choose Subject: </label>
         <%= select_tag "subject", options_from_collection_for_select(@subject, 'SubjectID', 'SubjectName'),
                           :prompt => "-Select a Subject-", :onchange => "javascript: this.form.submit();" %>
@@ -47,7 +48,7 @@
   <br>
     <label class='control-label bold' >Or Search for a Resource by Name:</label>
        
-        <%= form_tag "/resources/list", :class =>"form-inline" do -%>
+        <%= form_tag "resources/list", :class =>"form-inline", :autocomplete => :off do -%>
     
         <label class="radio inline">
           <input type="radio" name="filter" value="Begins with">Begins with

@@ -1,5 +1,8 @@
 class Resource < ActiveRecord::Base
   
+  set_table_name 'Resources'
+  set_primary_key 'ResourceID'
+  
   attr_accessible :name
   
   belongs_to :subject
